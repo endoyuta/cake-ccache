@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+app_dir_name="app"
+cache_path="$PWD/$app_dir_name/tmp/cache"
+models_path="$PWD/$app_dir_name/tmp/cache/models"
+persistent_path="$PWD/$app_dir_name/tmp/cache/persistent"
+
+echo "cache cleaning..."
+
+if [ -d $cache_path -a -d $models_path -a -d $persistent_path ]; then
+  find $cache_path -type f | xargs rm
+  touch $models_path/empty
+  touch $persistent_path/empty
+else
+  echo "cakephp cache direcotries are not found."
+  echo "- $cache_path"
+  echo "- $models_path"
+  echo "- $persistent_path"
+fi
+
+echo "Done."
